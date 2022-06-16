@@ -16,3 +16,6 @@ export const inputName2 = document.getElementById(`inputName2`);
 export const inputDescription2 = document.getElementById(`inputDescription2`);
 export const inputPrice2 = document.getElementById(`inputPrice2`);
 export const buttonPutOne = document.getElementById(`buttonPutOne`);
+
+export const inputId3 = document.getElementById(`inputId3`);
+export const buttonDeleteOne = document.getElementById(`buttonDeleteOne`);

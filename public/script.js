@@ -81,7 +81,6 @@ const getOne = (id) => {
     });
 }
 
-//Get one button
 DOM.buttonGetOne.onclick = () => getOne(inputId.value);
 
 //Update one function
@@ -98,3 +97,16 @@ const put = (id) => {
 }
 
 DOM.buttonPutOne.onclick = () => put(inputId2.value);
+
+// Delete one function
+const deleteOne = (id) => {
+  axios.delete(`/delete/${id}`)
+    .then((response) => {
+      console.log(response);
+      get();
+      }).catch((err) => {
+      console.log(err);
+    });
+}
+
+DOM.buttonDeleteOne.onclick = () => deleteOne(inputId3.value);
