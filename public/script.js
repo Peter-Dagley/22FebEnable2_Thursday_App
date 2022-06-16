@@ -12,7 +12,7 @@ import * as DOM from './dom.js';
 const writeItem = item => {
   const child = document.createElement(`li`);
   child.id = item._id;
-  child.innerHTML = `${JSON.stringify(item)}`;
+  child.innerHTML = `(${item._id})` + ` Name: ` + `${item.name}` + `, Description: ` + `${item.description}` + `, Price: ` + `${item.price}`;
   DOM.listOutput.appendChild(child);
 }
 
@@ -59,7 +59,7 @@ get();
 const writeItem2 = item => {
   const child = document.createElement(`li`);
   child.id = item._id;
-  child.innerHTML = `${JSON.stringify(item)}`;
+  child.innerHTML = `(${item._id})` + ` Name: ` + `${item.name}` + `, Description: ` + `${item.description}` + `, Price: ` + `${item.price}`;
   DOM.listOutput2.appendChild(child);
 }
 
