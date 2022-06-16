@@ -83,3 +83,18 @@ const getOne = (id) => {
 
 //Get one button
 DOM.buttonGetOne.onclick = () => getOne(inputId.value);
+
+//Update one function
+const put = (id) => {
+  axios.put(`/update/${id}`, {   name : DOM.inputName2.value,
+                                 description : DOM.inputDescription2.value, 
+                                 price : DOM.inputPrice2.value})
+    .then((response) => {
+      console.log(response);
+      get();
+    }).catch((err) => {
+      console.log(err);
+    });
+}
+
+DOM.buttonPutOne.onclick = () => put(inputId2.value);
