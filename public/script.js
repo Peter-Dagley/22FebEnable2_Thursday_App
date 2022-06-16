@@ -1,5 +1,10 @@
 `use strict`
 
+// express
+// const express = require(`express`);
+// const app = express();
+// app.listen(8080);
+
 // import the dom
 import * as DOM from './dom.js';
 
@@ -7,7 +12,7 @@ import * as DOM from './dom.js';
 const writeItem = item => {
   const child = document.createElement(`li`);
   child.id = item._id;
-  child.innerHTML = `${JSON.stringify(item)}`;
+  child.innerHTML = `(${item._id})` + ` Name: ` + `${item.name}` + `, Description: ` + `${item.description}` + `, Price: ` + `${item.price}`;
   DOM.listOutput.appendChild(child);
 }
 
@@ -47,3 +52,61 @@ DOM.buttonCreate.onclick = () => post();
 
 // run the get function on page load
 get();
+
+
+// New stuff
+// list item function
+const writeItem2 = item => {
+  const child = document.createElement(`li`);
+  child.id = item._id;
+  child.innerHTML = `(${item._id})` + ` Name: ` + `${item.name}` + `, Description: ` + `${item.description}` + `, Price: ` + `${item.price}`;
+  DOM.listOutput2.appendChild(child);
+}
+
+// GET one function
+const getOne = (id) => {
+  DOM.listOutput2.innerHTML = ``;
+
+  axios.get(`/read/${id}`)
+    .then((response) => {
+      if (!Array.isArray(response.data)) {
+        writeItem2(response.data);
+      } else {
+        for (let item of response.data) {
+          writeItem2(item);
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+}
+
+DOM.buttonGetOne.onclick = () => getOne(inputId.value);
+
+//Update one function
+const put = (id) => {
+  axios.put(`/update/${id}`, {   name : DOM.inputName2.value,
+                                 description : DOM.inputDescription2.value, 
+                                 price : DOM.inputPrice2.value})
+    .then((response) => {
+      console.log(response);
+      get();
+    }).catch((err) => {
+      console.log(err);
+    });
+}
+
+DOM.buttonPutOne.onclick = () => put(inputId2.value);
+
+// Delete one function
+const deleteOne = (id) => {
+  axios.delete(`/delete/${id}`)
+    .then((response) => {
+      console.log(response);
+      get();
+      }).catch((err) => {
+      console.log(err);
+    });
+}
+
+DOM.buttonDeleteOne.onclick = () => deleteOne(inputId3.value);
