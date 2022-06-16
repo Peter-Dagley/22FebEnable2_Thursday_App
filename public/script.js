@@ -1,10 +1,5 @@
 `use strict`
 
-// express
-// const express = require(`express`);
-// const app = express();
-// app.listen(8080);
-
 // import the dom
 import * as DOM from './dom.js';
 
@@ -36,6 +31,10 @@ const get = () => {
 
 // POST function
 const post = () => {
+  if (DOM.inputName.value == "" || DOM.inputDescription.value == "" || DOM.inputPrice.value == 0) {
+    console.log("Empty fields.")
+    alert("Empty fields.")
+  } else {
   axios.post(`/create`, {   name : DOM.inputName.value,
                             description : DOM.inputDescription.value, 
                             price : DOM.inputPrice.value})
@@ -45,7 +44,7 @@ const post = () => {
     }).catch((err) => {
       console.log(err);
     });
-}
+  }}
 
 // set up the buttons' on click events
 DOM.buttonCreate.onclick = () => post();
@@ -65,8 +64,11 @@ const writeItem2 = item => {
 
 // GET one function
 const getOne = (id) => {
+  if (DOM.inputId.value == 0) {
+    console.log("Empty fields.")
+    alert("Empty fields.")
+  } else {
   DOM.listOutput2.innerHTML = ``;
-
   axios.get(`/read/${id}`)
     .then((response) => {
       if (!Array.isArray(response.data)) {
@@ -79,12 +81,16 @@ const getOne = (id) => {
     }).catch((err) => {
       console.log(err);
     });
-}
+}}
 
 DOM.buttonGetOne.onclick = () => getOne(inputId.value);
 
 //Update one function
 const put = (id) => {
+  if (DOM.inputName2.value == "" || DOM.inputDescription2.value == "" || DOM.inputPrice2.value == 0 || DOM.inputId2.value == 0) {
+    console.log("Empty fields.")
+    alert("Empty fields.")
+  } else {
   axios.put(`/update/${id}`, {   name : DOM.inputName2.value,
                                  description : DOM.inputDescription2.value, 
                                  price : DOM.inputPrice2.value})
@@ -94,12 +100,16 @@ const put = (id) => {
     }).catch((err) => {
       console.log(err);
     });
-}
+}}
 
 DOM.buttonPutOne.onclick = () => put(inputId2.value);
 
 // Delete one function
 const deleteOne = (id) => {
+  if (DOM.inputId3.value == 0) {
+    console.log("Empty fields.")
+    alert("Empty fields.")
+  } else {
   axios.delete(`/delete/${id}`)
     .then((response) => {
       console.log(response);
@@ -107,6 +117,6 @@ const deleteOne = (id) => {
       }).catch((err) => {
       console.log(err);
     });
-}
+}}
 
 DOM.buttonDeleteOne.onclick = () => deleteOne(inputId3.value);
